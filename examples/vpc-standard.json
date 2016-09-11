@@ -44,7 +44,7 @@
     "vpc": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "blocks/vpc-public-and-private.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "stacks/vpc-public-and-private.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "ClassB": { "Ref": "ClassB" }
@@ -54,7 +54,7 @@
     "nat": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "blocks/nat-gateway.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "stacks/nat-gateway.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "PublicSubnet": { "Fn::GetAtt" : [ "vpc", "Outputs.SubnetAPublic" ] },
@@ -65,7 +65,7 @@
     "bastion": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "blocks/bastion-host.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "stacks/bastion-host.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "VpcId": { "Fn::GetAtt": [ "vpc", "Outputs.VpcId" ] },
