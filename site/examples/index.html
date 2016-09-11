@@ -47,6 +47,27 @@
 
     <div class="bd-featurette">
         <div class="container">
+
+            <h4>Select a Region</h4>
+            <select id="region-selector" onchange="updateRegionLinks()">
+                <option value="us-east-1">US East (N. Virginia)</option>
+                <option value="us-west-2">US West (Oregon)</option>
+                <option value="us-west-1">US West (N. California)</option>
+                <option value="eu-west-1">EU (Ireland)</option>
+                <option value="eu-central-1">EU (Frankfurt)</option>
+                <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+                <option value="ap-northeast-1">Asia Pacific (Tokyo)</option>
+                <option value="ap-southeast-2">Asia Pacific (Sydney)</option>
+                <option value="ap-northeast-2">Asia Pacific (Seoul)</option>
+                <option value="ap-south-1">Asia Pacific (Mumbai)</option>
+                <option value="sa-east-1">South America (São Paulo)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="bd-featurette">
+        <div class="container">
+
             <div class="card">
                 <div class="card-block">
                     <h4 class="card-title">Create a Virtual Private Cloud (VPC)</h4>
@@ -55,14 +76,40 @@
                         a NAT gateway for hosts in the private subnet to get Internet connectivity.
                     </p>
                 </div>
-                <div class="card-block">
+                <p class="card-block">
                     <a target="_blank" role="button" class="btn btn-outline-success card-link" href="examples/vpc-standard.json">View Source</a>
-                    <a target="_blank" role="button" class="btn btn-warning card-link" href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=VpcStandard&templateURL=https://cfn-stacks.com/examples/vpc-standard.json">&nbsp;&nbsp;&nbsp;Launch&nbsp;&nbsp;&nbsp;</a>
+                    <a target="_blank" role="button" data-stack="/examples/vpc-standard.json" data-stack-name="VpcStandard" class="btn btn-warning card-link region-link" href="#">Launch</a>
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Create a Regularly Updated List of AMIs</h4>
+                    <p class="card-text">
+                        Deploy a Lamda function that will run once per day and create a
+                        CloudFormation template containing the most recently updated AMIs in
+                        each region that match a specified filter.
+                    </p>
                 </div>
+                <p class="card-block">
+                    <a target="_blank" role="button" class="btn btn-outline-success card-link" href="stacks/most-recent-ami.json">View Source</a>
+                    <a target="_blank" role="button" data-stack="/stacks/most-recent-ami.json" data-stack-name="most-recent-ami" class="btn btn-warning card-link region-link" href="#">Launch</a>
             </div>
 
         </div>
     </div>
 
+<script src="//code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script>
+    function updateRegionLinks() {
+        $("a.region-link").each(function(){
+            var region = $("#region-selector").val();
+            var s3Region = region == "us-east-1" ? "" : '-' + region; // us-east-1 S3 region name is just s3 not s3-region
+            var template = 'https://s3' + s3Region + '.amazonaws.com/cfn-stacks.com-' + region + $(this).attr('data-stack');
+            $(this).attr('href', 'https://console.aws.amazon.com/cloudformation/home?region=' + region + '#/stacks/new?stackName=' + $(this).attr('data-stack-name') + '&templateURL=' + template);
+        });
+    }
+    $(function () { updateRegionLinks(); })
+</script>
 </body>
 </html>

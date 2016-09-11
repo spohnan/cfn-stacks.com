@@ -41,13 +41,40 @@
 
 <main class="bd-masthead" id="content">
     <div class="container">
-        <p class="lead">More Info About Using CloudFormation Stacks</p>
+        <p class="lead">Using CloudFormation Stacks</p>
     </div>
 </main>
 
 <div class="bd-featurette">
     <div class="container">
-
+        <h4>What are CloudFormation Stacks?</h4>
+        <p>
+            When you use AWS CloudFormation, you work with templates and stacks. You create templates to describe your AWS
+            resources and their properties. Whenever you create a stack, AWS CloudFormation provisions the resources that
+            are described in your template. The examples on this site emphasize the refactoring of larger solutions into
+            multiple nested stacks for the purpose of re-use.
+            <small><a target="_blank" href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html">(read more)</a></small>
+        </p>
+        <h4>What are the benefits?</h4>
+        <p>
+            If you deploy a number of different solutions using CloudFormation you'll soon spot sections of code that are
+            copy and pasted between templates. By using nested stacks you'll increase the reusability of your code and increase
+            the density of your deployments by avoiding the 200 resources per stack limit.
+            <small><a target="_blank" href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">(read more)</a></small>
+        </p>
+        <h4>What are the potential gotchas?</h4>
+        <p>
+            As stated on the CloudFormation examples page in the AWS documentation there is some variation to the capabilities
+            of each AWS region so the idea that you can come up with simplistic component templates that will work anywhere
+            is probably a difficult task. That said, with the use of some conditional checks, dynamically created mapping lists
+            and the heavy use of the AWS::Region pseudo parameter many solutions can be quite portable.
+            <small><a target="_blank" href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-sample-templates.html">(read more)</a></small>
+        </p>
+        <h4>How do I use or modify?</h4>
+        <p>
+            The examples page has a launch button to quickly check out an example, more than likely you'll want to make some
+            tweaks to the templates to customize them to you needs. All of the code is available <a target="_blank" href="https://github.com/spohnan/cfn-stacks.com">on GitHub</a>
+        </p>
     </div>
 </div>
 
