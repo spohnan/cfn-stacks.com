@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>cfn-stacks.com</title>
+    <base href="//s3.amazonaws.com/cfn-stacks.com/">
+    <link href="site/css/bootstrap.min.css" rel="stylesheet">
+    <link href="site/css/site.css" rel="stylesheet">
+    <link rel="icon" href="site/images/favicon.ico">
+</head>
+<body class="bd-home">
+    <header class="navbar navbar-light navbar-static-top bd-navbar">
+        <div class="container">
+            <nav>
+                <div class="clearfix">
+                    <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav" aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        &#9776;
+                    </button>
+                    <a class="navbar-brand hidden-sm-up" href="site/index.html">
+                        cfn-stacks
+                    </a>
+                </div>
+                <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-item nav-link active" href="site/index.html">cfn-stacks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link " href="site/examples/index.html">examples</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="bd-masthead" id="content">
+        <div class="container">
+            <p class="lead">Examples of using CloudFormation Stacks</p>
+        </div>
+    </main>
+
+    <div class="bd-featurette">
+        <div class="container">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Create a Virtual Private Cloud (VPC)</h4>
+                    <p class="card-text">
+                        Build a VPC with both public and private subnets, a bastion host and
+                        a NAT gateway for hosts in the private subnet to get Internet connectivity.
+                    </p>
+                </div>
+                <div class="card-block">
+                    <a target="_blank" role="button" class="btn btn-outline-success card-link" href="https://raw.githubusercontent.com/spohnan/cfn-stacks/master/examples/vpc-standard.json">View Source</a>
+                    <a target="_blank" role="button" class="btn btn-warning card-link" href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=VpcStandard&templateURL=https://s3.amazonaws.com/cfn-stacks.com/examples/vpc-standard.json">&nbsp;&nbsp;&nbsp;Launch&nbsp;&nbsp;&nbsp;</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
