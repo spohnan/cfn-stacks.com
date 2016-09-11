@@ -27,11 +27,6 @@
       "Default": 0,
       "MinValue": 0,
       "MaxValue": 255
-    },
-    "TemplateBucket": {
-      "Description": "S3 bucket that contains the linked CF templates with trailing slash ex: https://s3/foo/",
-      "Type": "String",
-      "Default": "https://s3.amazonaws.com/cfn-stacks.com/"
     }
   },
   "Resources": {
@@ -44,7 +39,7 @@
     "vpc": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "stacks/vpc-public-and-private.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ "https://s3-", { "Ref" : "AWS::Region" }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/vpc-public-and-private.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "ClassB": { "Ref": "ClassB" }
@@ -54,7 +49,7 @@
     "nat": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "stacks/nat-gateway.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ "https://s3-", { "Ref" : "AWS::Region" }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/nat-gateway.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "PublicSubnet": { "Fn::GetAtt" : [ "vpc", "Outputs.SubnetAPublic" ] },
@@ -65,7 +60,7 @@
     "bastion": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ { "Ref": "TemplateBucket" }, "stacks/bastion-host.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ "https://s3-", { "Ref" : "AWS::Region" }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/bastion-host.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "VpcId": { "Fn::GetAtt": [ "vpc", "Outputs.VpcId" ] },
