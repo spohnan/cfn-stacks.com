@@ -29,6 +29,21 @@
       "MaxValue": 255
     }
   },
+  "Mappings": {
+    "S3RegionName": {
+      "us-east-1": { "s3region": "s3" },
+      "us-west-1": { "s3region": "s3-us-west-1" },
+      "us-west-2": { "s3region": "s3-us-west-2" },
+      "eu-west-1": { "s3region": "s3-eu-west-1" },
+      "eu-central-1": { "s3region": "s3-eu-central-1" },
+      "ap-southeast-1": { "s3region": "s3-ap-southeast-1" },
+      "ap-southeast-2": { "s3region": "s3-ap-southeast-2" },
+      "ap-northeast-1": { "s3region": "s3-ap-northeast-1" },
+      "ap-northeast-2": { "s3region": "s3-ap-northeast-2" },
+      "ap-south-1": { "s3region": "s3-ap-south-1" },
+      "sa-east-1": { "s3region": "s3-sa-east-1" }
+    }
+  },
   "Resources": {
     "ami": {
       "Type": "AWS::CloudFormation::Stack",
@@ -39,7 +54,7 @@
     "vpc": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ "https://s3-", { "Ref" : "AWS::Region" }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/vpc-public-and-private.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ "https://", { "Fn::FindInMap": [ "S3RegionName", { "Ref" : "AWS::Region" }, "s3region" ] }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/vpc-public-and-private.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "ClassB": { "Ref": "ClassB" }
@@ -49,7 +64,7 @@
     "nat": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ "https://s3-", { "Ref" : "AWS::Region" }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/nat-gateway.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ "https://", { "Fn::FindInMap": [ "S3RegionName", { "Ref" : "AWS::Region" }, "s3region" ] }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/nat-gateway.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "PublicSubnet": { "Fn::GetAtt" : [ "vpc", "Outputs.SubnetAPublic" ] },
@@ -60,7 +75,7 @@
     "bastion": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "", [ "https://s3-", { "Ref" : "AWS::Region" }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/bastion-host.json" ]] },
+        "TemplateURL": { "Fn::Join": [ "", [ "https://", { "Fn::FindInMap": [ "S3RegionName", { "Ref" : "AWS::Region" }, "s3region" ] }, ".amazonaws.com/cfn-stacks.com-", { "Ref" : "AWS::Region" }, "/stacks/bastion-host.json" ]] },
         "TimeoutInMinutes": "20",
         "Parameters": {
           "VpcId": { "Fn::GetAtt": [ "vpc", "Outputs.VpcId" ] },
